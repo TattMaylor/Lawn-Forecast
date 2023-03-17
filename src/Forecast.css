@@ -1,8 +1,10 @@
-/**
-* ----------------------------------------------
-* Demo styles
-* ----------------------------------------------
-**/
+.CircularProgressbar {
+    width: 50%;
+}
+
+table {
+    text-align: center;
+}
 
 .accordion__button {
     background-color: #f4f4f4;
@@ -12,13 +14,13 @@
     width: 100%;
     text-align: left;
     border: none;
-  }
-  
-  .accordion__button:hover {
+}
+
+.accordion__button:hover {
     background-color: #ddd;
-  }
-  
-  .accordion__button:before {
+}
+
+.accordion__button:before {
     display: inline-block;
     content: '';
     height: 10px;
@@ -27,32 +29,28 @@
     border-bottom: 2px solid currentColor;
     border-right: 2px solid currentColor;
     transform: rotate(-45deg);
-  }
-  
-  .accordion__button[aria-expanded='true']::before,
-  .accordion__button[aria-selected='true']::before {
+}
+
+.accordion__button[aria-expanded='true']::before,
+.accordion__button[aria-selected='true']::before {
     transform: rotate(45deg);
-  }
-  
-  [hidden] {
+}
+
+[hidden] {
     display: none;
-  }
-  
-  .accordion__panel {
+}
+
+.accordion__panel {
     padding: 20px;
-    animation: fadein 0.35s ease-in;
-  }
-  
-  /* -------------------------------------------------- */
-  /* ---------------- Animation part ------------------ */
-  /* -------------------------------------------------- */
-  
-  @keyframes fadein {
+    /*animation: fadein 0.35s ease-in;*/
+}
+
+@keyframes fadein {
     0% {
         opacity: 0;
     }
-  
+
     100% {
         opacity: 1;
     }
-  }
+}
