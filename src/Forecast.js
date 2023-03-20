@@ -9,6 +9,7 @@ import {
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import './Forecast.css'
+import Graph from './Graph'
 
 function isPrecipNull(data) {
     if (data) {
@@ -29,21 +30,42 @@ function convertDate(date) {
 function assessWeather(data, index) {
     let maxTemp = data.daily.temperature_2m_max[index];
     let maxPrecip = data.daily.precipitation_probability_max[index];
-    
+
     if (maxTemp >= 50) {
-       if (maxPrecip >= 50) {
-        return '🌧';
-       }
-       else if (maxPrecip >= 25) {
-        return '☁';
-       }
-       else {
-        return '☀';
-       }
+        if (maxPrecip >= 50) {
+            return '❌';
+        }
+        else if (maxPrecip >= 25) {
+            return '✅';
+        }
+        else {
+            return '✅';
+        }
     }
     else {
-        return '🥶';
+        return '❌';
     }
+}
+
+function assessWeatherAttributes(data, index) {
+    let attributeString = '';
+    let maxTemp = data.daily.temperature_2m_max[index];
+    let maxPrecip = data.daily.precipitation_probability_max[index];
+
+    if (maxTemp >= 70) {
+        attributeString += '☀ ';
+    }
+    if (maxTemp <= 50) {
+        attributeString += '🥶 ';
+    }
+    if (maxPrecip >= 50) {
+        attributeString += '🌧 ';
+    }
+    else if (maxPrecip >= 25) {
+        attributeString += '☁ ';
+    }
+
+    return attributeString;
 }
 
 export default class Forecast extends Component {
@@ -57,43 +79,47 @@ export default class Forecast extends Component {
                                 <AccordionItemHeading>
                                     <AccordionItemButton>
                                         {assessWeather(this.props.data, index)}
+                                        {` - [${assessWeatherAttributes(this.props.data, index)}]`}
                                         {' '}
                                         {convertDate(day)}
                                     </AccordionItemButton>
                                 </AccordionItemHeading>
                                 <AccordionItemPanel>
                                     <table>
-                                        <tr>
-                                            <td>
-                                                High
-                                            </td>
-                                            <td>
-                                                Low
-                                            </td>
-                                            <td>
-                                                Rain
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <CircularProgressbar value={100} text={`${Math.ceil(this.props.data.daily.temperature_2m_max[index])}°F`}
-                                                    styles={buildStyles({
-                                                        pathColor: '#FF6961',
-                                                        textColor: 'black'
-                                                    })} />
-                                            </td>
-                                            <td>
-                                                <CircularProgressbar value={100} text={`${Math.ceil(this.props.data.daily.temperature_2m_min[index])}°F`}
-                                                    styles={buildStyles({
-                                                        pathColor: '#ADD8E6',
-                                                        textColor: 'black'
-                                                    })} />
-                                            </td>
-                                            <td>
-                                                <CircularProgressbar value={this.props.data.daily.precipitation_probability_max[index]} text={isPrecipNull(this.props.data.daily.precipitation_probability_max[index])} />
-                                            </td>
-                                        </tr>
+                                        <thead>
+                                            <tr>
+                                                <td>
+                                                    High
+                                                </td>
+                                                <td>
+                                                    Low
+                                                </td>
+                                                <td>
+                                                    Rain
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <CircularProgressbar value={100} text={`${Math.ceil(this.props.data.daily.temperature_2m_max[index])}°F`}
+                                                        styles={buildStyles({
+                                                            pathColor: '#FF6961',
+                                                            textColor: 'black'
+                                                        })} />
+                                                </td>
+                                                <td>
+                                                    <CircularProgressbar value={100} text={`${Math.ceil(this.props.data.daily.temperature_2m_min[index])}°F`}
+                                                        styles={buildStyles({
+                                                            pathColor: '#ADD8E6',
+                                                            textColor: 'black'
+                                                        })} />
+                                                </td>
+                                                <td>
+                                                    <CircularProgressbar value={this.props.data.daily.precipitation_probability_max[index]} text={isPrecipNull(this.props.data.daily.precipitation_probability_max[index])} />
+                                                </td>
+                                            </tr>
+                                        </thead>
                                     </table>
+                                    <Graph data={this.props.data} day={day} />
                                 </AccordionItemPanel>
                             </AccordionItem>
                         ))}
