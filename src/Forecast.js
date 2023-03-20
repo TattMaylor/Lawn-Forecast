@@ -20,9 +20,31 @@ function isPrecipNull(data) {
 };
 
 function convertDate(date) {
-    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(date).toLocaleDateString("en-US", options);
+    return new Date(date).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 };
+
+/*
+    Process weather variables and return visual cues for quick reference by the user
+*/
+function assessWeather(data, index) {
+    let maxTemp = data.daily.temperature_2m_max[index];
+    let maxPrecip = data.daily.precipitation_probability_max[index];
+    
+    if (maxTemp >= 50) {
+       if (maxPrecip >= 50) {
+        return '🌧';
+       }
+       else if (maxPrecip >= 25) {
+        return '☁';
+       }
+       else {
+        return '☀';
+       }
+    }
+    else {
+        return '🥶';
+    }
+}
 
 export default class Forecast extends Component {
     render() {
@@ -34,6 +56,8 @@ export default class Forecast extends Component {
                             <AccordionItem key={day}>
                                 <AccordionItemHeading>
                                     <AccordionItemButton>
+                                        {assessWeather(this.props.data, index)}
+                                        {' '}
                                         {convertDate(day)}
                                     </AccordionItemButton>
                                 </AccordionItemHeading>
