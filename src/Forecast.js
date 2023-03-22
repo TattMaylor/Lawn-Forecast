@@ -52,10 +52,10 @@ function assessWeatherAttributes(data, index) {
     let maxTemp = data.daily.temperature_2m_max[index];
     let maxPrecip = data.daily.precipitation_probability_max[index];
 
-    if (maxTemp >= 70) {
-        attributeString += '☀ ';
+    if (maxTemp >= 50) {
+        attributeString += '🌞 ';
     }
-    if (maxTemp <= 50) {
+    if (maxTemp < 50) {
         attributeString += '🥶 ';
     }
     if (maxPrecip >= 50) {
