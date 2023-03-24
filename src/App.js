@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Forecast from './Forecast'
-import './App.css';
 import zipcodes from './assets/zipcodes.json';
+import './App.css';
 
 function App() {
 
@@ -35,9 +35,11 @@ function App() {
 
   return (
     <>
-      <input id='zipcode'></input>
-      <button onClick={() => { fetchData() }}>Fetch Data</button>
-      <p>Displaying data for: {`${locationDataObject.city}, ${locationDataObject.state}`}</p>
+      <div>
+        <p>Displaying data for: {`${locationDataObject.city}, ${locationDataObject.state}`}</p>
+        <input id='zipcode' placeholder='Input Zipcode'></input>
+        <button onClick={() => { fetchData() }}>Fetch Data</button>
+      </div>
       <Forecast data={weatherDataObject} />
     </>
   );

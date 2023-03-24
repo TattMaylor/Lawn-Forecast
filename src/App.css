@@ -1,8 +1,19 @@
-h1 {
-  text-align: center;
+p {
+  margin-left: 10px;
 }
 
 button {
-  height: 20px;
-  width: 150px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  width: 95%;
+  height: 30px;
+}
+
+input {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  margin-left: 10px;
+  text-align: center;
+  width: 95%;
+  height: 30px;
 }
