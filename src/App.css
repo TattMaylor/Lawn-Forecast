@@ -1,19 +1,16 @@
-p {
-  margin-left: 10px;
+.main-interface {
+  padding-bottom: 1em;
 }
 
-button {
-  margin-left: 10px;
-  margin-bottom: 10px;
-  width: 95%;
+.main-interface p {
+  padding-left: 1em;
+}
+
+.zipcode-form {
+  padding-left: 1em;
   height: 30px;
 }
 
-input {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  margin-left: 10px;
-  text-align: center;
-  width: 95%;
-  height: 30px;
+.zipcode-form input {
+  width: 7em;
 }

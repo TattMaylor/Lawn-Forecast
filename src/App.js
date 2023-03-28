@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Forecast from './Forecast'
 import zipcodes from './assets/zipcodes.json';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
@@ -35,12 +36,16 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="main-interface">
         <p>Displaying data for: {`${locationDataObject.city}, ${locationDataObject.state}`}</p>
-        <input id='zipcode' placeholder='Input Zipcode'></input>
-        <button onClick={() => { fetchData() }}>Fetch Data</button>
+        <div className="zipcode-form">
+          <input id='zipcode' placeholder='Input Zipcode'></input>
+          <button onClick={() => { fetchData() }}>Fetch Data</button>
+        </div>
       </div>
-      <Forecast data={weatherDataObject} />
+      <div className="weather-interface">
+        <Forecast data={weatherDataObject} />
+      </div>
     </>
   );
 }

@@ -7,9 +7,9 @@ import {
     AccordionItemPanel,
 } from 'react-accessible-accordion';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import Graph from './Graph'
 import 'react-circular-progressbar/dist/styles.css';
 import './Forecast.css'
-import Graph from './Graph'
 
 function isPrecipNull(data) {
     if (data) {
@@ -71,7 +71,7 @@ function assessWeatherAttributes(data, index) {
 export default class Forecast extends Component {
     render() {
         return (
-            <div>
+            <div className="forecast">
                 {this.props.data && this.props.data.daily && this.props.data.daily.temperature_2m_max && (
                     <Accordion>
                         {this.props.data.daily.time.map((day, index) => (
