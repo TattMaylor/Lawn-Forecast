@@ -1,3 +1,9 @@
+@media (min-width: 800px) {
+    .forecast {
+        width: 50%;
+    }
+  }
+
 .CircularProgressbar {
     width: 50%;
 }
